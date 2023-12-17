@@ -9,7 +9,7 @@ from time import strftime
 with open("password.json", "r") as f:
     password = json.loads(f.read())["password"]
 
-URL = "https://cs-api.pltw.org/BobIsBetter"
+URL = "https://cs-api.pltw.org/EmergencyPal"
 
 
 class App(ctk.CTk):
@@ -90,7 +90,7 @@ class App(ctk.CTk):
                 "Evacuate the building immediately."))
             response = requests.post(
                 URL + "?text=" +
-                f"Fire, Evacuate the building immediately, Date: {current_date}"
+                f"Fire, Evacuate the building immediately and go to Brighton Parking Lot, Date: {current_date}"
             )
         if self.shooter_var.get():
             selected_emergencies.append((
@@ -98,7 +98,7 @@ class App(ctk.CTk):
                 "Take shelter and stay in a safe location."))
             response = requests.post(
                 URL + "?text=" +
-                f"School Shooter, Take shelter and stay in a safe location, Date: {current_date}"
+                f"School Shooter, Take shelter and stay in a safe location.  Avoid Deny Defend, Date: {current_date}"
             )
         if self.earthquake_var.get():
             selected_emergencies.append((
@@ -106,7 +106,7 @@ class App(ctk.CTk):
                 "Drop, Cover, and Hold On. Stay indoors until shaking stops."))
             response = requests.post(
                 URL + "?text=" +
-                f"Earthquake, Drop, Cover, and Hold On. Stay indoors until shaking stops, Date: {current_date}"
+                f"Earthquake, Drop, Cover, and Hold On. Stay indoors until shaking stops and then evacuate to Brighton Parking Lot, Date: {current_date}"
             )
         if not selected_emergencies:
             messagebox.showwarning(
@@ -215,7 +215,6 @@ class App(ctk.CTk):
         except requests.exceptions.RequestException as e:
             messagebox.showerror("Error", f"Failed to fetch previous reports: {e}")
 
-        return []
 
 if __name__ == "__main__":
     app = App()
